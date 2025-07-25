@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+        }
+        .player {
+            display: flex;
+            align-items: center;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            width: 500px;
+            margin-bottom: 20px;
+            border: 2px solid white;
+            z-index: 2;
+        }
+        .play-pause {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .time {
+            margin: 0 10px;
+        }
+        .progress-container {
+            position: relative;
+            flex-grow: 1;
+            height: 10px;
+            background-color: #666;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .progress {
+            height: 100%;
+            background-color: red;
+            width: 0%;
+        }
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        #fileInput {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" accept="video/*">
+
+    <video id="video" src="" muted></video>
+    <audio id="audio" src=""></audio>
+
+    <div class="player">
+        <div class="play-pause">
+            <button id="playButton">Play</button>
+            <button id="pauseButton">Pause</button>
+        </div>
+        <div class="time" id="currentTime">0:00</div>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress" id="progress"></div>
+        </div>
+        <div class="time" id="totalTime">0:00</div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const video = document.getElementById('video');
+        const audio = document.getElementById('audio');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const currentTimeElement = document.getElementById('currentTime');
+        const totalTimeElement = document.getElementById('totalTime');
+        const progressElement = document.getElementById('progress');
+        const progressContainer = document.getElementById('progressContainer');
+        const skipTime = 5;
+
+        // Function to set the document title
+        function updateDocumentTitle(filename) {
+            if (filename) {
+                document.title = filename;
+            } else {
+                document.title = 'Video Player';
+            }
+        }
+
+        // Set initial title when no file is selected
+        updateDocumentTitle();
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const fileURL = URL.createObjectURL(file);
+                video.src = fileURL;
+                audio.src = fileURL;
+                video.load();
+                audio.load();
+
+                // Update the title with the file name
+                updateDocumentTitle(file.name);
+            }
+        });
+
+        function syncPlay() {
+            video.play();
+            audio.play();
+        }
+
+        function syncPause() {
+            video.pause();
+            audio.pause();
+        }
+
+        playButton.addEventListener('click', syncPlay);
+        pauseButton.addEventListener('click', syncPause);
+
+        video.addEventListener('loadedmetadata', () => {
+            const totalMinutes = Math.floor(video.duration / 60);
+            const totalSeconds = Math.floor(video.duration % 60).toString().padStart(2, '0');
+            totalTimeElement.textContent = `${totalMinutes}:${totalSeconds}`;
+        });
+
+        video.addEventListener('timeupdate', () => {
+            if (Math.abs(audio.currentTime - video.currentTime) > 0.1) {
+                audio.currentTime = video.currentTime;
+            }
+
+            const currentMinutes = Math.floor(video.currentTime / 60);
+            const currentSeconds = Math.floor(video.currentTime % 60).toString().padStart(2, '0');
+            currentTimeElement.textContent = `${currentMinutes}:${currentSeconds}`;
+
+            const progressPercentage = (video.currentTime / video.duration) * 100;
+            progressElement.style.width = `${progressPercentage}%`;
+        });
+
+        progressContainer.addEventListener('click', (event) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const newTime = (offsetX / rect.width) * video.duration;
+            video.currentTime = newTime;
+            audio.currentTime = newTime;
+        });
+
+        let isDragging = false;
+
+        progressContainer.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            updateProgress(event);
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                updateProgress(event);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+            }
+        });
+
+        function updateProgress(event) {
+            const rect = progressContainer.getBoundingClientRect();
+            const offsetX = event.clientX - rect.left;
+            const newTime = (offsetX / rect.width) * video.duration;
+            video.currentTime = newTime;
+            audio.currentTime = newTime;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                event.preventDefault();
+                if (video.paused) {
+                    syncPlay();
+                } else {
+                    syncPause();
+                }
+            }
+
+            if (event.code === 'ArrowLeft') {
+                video.currentTime = Math.max(0, video.currentTime - skipTime);
+                audio.currentTime = video.currentTime;
+            }
+
+            if (event.code === 'ArrowRight') {
+                video.currentTime = Math.min(video.duration, video.currentTime + skipTime);
+                audio.currentTime = video.currentTime;
+            }
+        });
+    </script>
+</body>
+</html>

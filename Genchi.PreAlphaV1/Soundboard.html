@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soundboard</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Ensures the content spans the full height of the screen */
+            overflow: hidden; /* Prevents any unwanted scrollbars */
+        }
+
+        body {
+            background-image: url('Website Sprites/SoundboardBackground.jpg'); /* Replace with your image path */
+            background-size: cover; /* Ensures the background image covers the entire page */
+            background-position: center; /* Centers the background image */
+            background-repeat: no-repeat; /* Prevents the background image from repeating */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centers content vertically */
+        }
+
+        /* Style the button */
+        .button-container button {
+            position: relative;
+            padding: 0;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.3s ease; /* Smooth scaling transition */
+        }
+
+        .button-container button:hover {
+            transform: scale(1.1); /* Scale up to 110% */
+        }
+
+        .button-container img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .button-container .button-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .button-container .button-text::after {
+            content: attr(data-text);
+        }
+
+        /* Styling for the labels */
+        .label {
+            margin: 20px 0;
+            font-size: 36px;
+            text-align: center;
+        }
+
+        /* Grid styles */
+        .button-container {
+            display: grid;
+            grid-gap: 10px;
+            margin: 20px 0;
+            width: 90%; /* Ensures buttons are responsive */
+            grid-template-columns: repeat(10, 1fr); /* Ensures exactly 10 buttons per row */
+            justify-items: center; /* Centers individual buttons */
+        }
+
+        .featured-sounds,
+        .regular-sounds {
+            grid-template-columns: repeat(10, 1fr); /* Both containers use 10 buttons per row */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="label">Sounds:</div>
+    <div class="button-container regular-sounds">
+
+        <button onclick="playAudio(1)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Discord Notification">
+            <div class="button-text" data-text="Discord Notification"></div>
+        </button>
+        <button onclick="playAudio(2)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Pedro Song">
+            <div class="button-text" data-text="Pedro Song"></div>
+        </button>
+        <button onclick="playAudio(3)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Vine Boom">
+            <div class="button-text" data-text="Vine Boom"></div>
+        </button>
+        <button onclick="playAudio(4)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="What The Hell">
+            <div class="button-text" data-text="What The Hell"></div>
+        </button>
+        <button onclick="playAudio(5)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="aaaaaaaa">
+            <div class="button-text" data-text="aaaaaaaa"></div>
+        </button>
+        <button onclick="playAudio(6)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Lost Connection">
+            <div class="button-text" data-text="Lost Connection"></div>
+        </button>
+        <button onclick="playAudio(7)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Mlg Air Horn">
+            <div class="button-text" data-text="Mlg Air Horn"></div>
+        </button>
+        <button onclick="playAudio(8)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Nooo">
+            <div class="button-text" data-text="Nooo"></div>
+        </button>
+        <button onclick="playAudio(9)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Oh hell nah bro">
+            <div class="button-text" data-text="Oh hell nah bro"></div>
+        </button>
+        <button onclick="playAudio(10)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Rizz sound effect">
+            <div class="button-text" data-text="Rizz sound effect"></div>
+        </button>
+        <button onclick="playAudio(11)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Bone Crack">
+            <div class="button-text" data-text="Bone Crack"></div>
+        </button>
+        <button onclick="playAudio(12)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="999 Social Credit Siren">
+            <div class="button-text" data-text="999 Social Credit Siren"></div>
+        </button>
+        <button onclick="playAudio(13)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Goku Drip">
+            <div class="button-text" data-text="Goku Drip"></div>
+        </button>
+        <button onclick="playAudio(14)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Get Out">
+            <div class="button-text" data-text="Get Out"></div>
+        </button>
+        <button onclick="playAudio(15)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Instagram Thud">
+            <div class="button-text" data-text="Instagram Thud"></div>
+        </button>
+        <button onclick="playAudio(16)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Pew Pew">
+            <div class="button-text" data-text="Pew Pew"></div>
+        </button>
+        <button onclick="playAudio(17)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Punch">
+            <div class="button-text" data-text="Punch"></div>
+        </button>
+        <button onclick="playAudio(18)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Snore Mimimimi">
+            <div class="button-text" data-text="Snore Mimimimi"></div>
+        </button>
+        <button onclick="playAudio(19)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Taco Bell Bong">
+            <div class="button-text" data-text="Taco Bell Bong"></div>
+        </button>
+        <button onclick="playAudio(20)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Bing Chilling">
+            <div class="button-text" data-text="Bing Chilling"></div>
+        </button>
+        <button onclick="playAudio(21)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Bruh">
+            <div class="button-text" data-text="Bruh"></div>
+        </button>
+        <button onclick="playAudio(22)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Bye Bye">
+            <div class="button-text" data-text="Bye Bye"></div>
+        </button>
+        <button onclick="playAudio(23)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Correct">
+            <div class="button-text" data-text="Correct"></div>
+        </button>
+        <button onclick="playAudio(24)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Whip">
+            <div class="button-text" data-text="Whip"></div>
+        </button>
+        <button onclick="playAudio(25)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Ding Sound">
+            <div class="button-text" data-text="Ding Sound"></div>
+        </button>
+        <button onclick="playAudio(26)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Discord Call">
+            <div class="button-text" data-text="Discord Call"></div>
+        </button>
+        <button onclick="playAudio(27)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Discord Leave Call">
+            <div class="button-text" data-text="Discord Leave Call"></div>
+        </button>
+        <button onclick="playAudio(28)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Five Nights At Freddy's Jump Scare">
+            <div class="button-text" data-text="Five Nights At Freddy's Jump Scare"></div>
+        </button>
+        <button onclick="playAudio(29)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Fortnite Default Dance">
+            <div class="button-text" data-text="Fortnite Default Dance but..."></div>
+        </button>
+        <button onclick="playAudio(30)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="It Was At This Moment He Knew">
+            <div class="button-text" data-text="It Was At This Moment He Knew"></div>
+        </button>
+        <button onclick="playAudio(31)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Huh">
+            <div class="button-text" data-text="Huh"></div>
+        </button>
+        <button onclick="playAudio(32)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Im About To Chuhhhh">
+            <div class="button-text" data-text="Im About To Chuhhhh"></div>
+        </button>
+        <button onclick="playAudio(33)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Jeopardy Theme Song">
+            <div class="button-text" data-text="Jeopardy Theme Song"></div>
+        </button>
+        <button onclick="playAudio(34)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Ladies and Gentlemen, We Got Him">
+            <div class="button-text" data-text="Ladies and Gentlemen, We Got Him"></div>
+        </button>
+        <button onclick="playAudio(35)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Let Her Go">
+            <div class="button-text" data-text="Let Her Go"></div>
+        </button>
+        <button onclick="playAudio(36)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Michael Don't Leave Me">
+            <div class="button-text" data-text="Michael Don't Leave Me"></div>
+        </button>
+        <button onclick="playAudio(37)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Discord Call Joke">
+            <div class="button-text" data-text="Discord Call Joke"></div>
+        </button>
+        <button onclick="playAudio(38)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Mwahahaha">
+            <div class="button-text" data-text="Mwahahaha"></div>
+        </button>
+        <button onclick="playAudio(39)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Oh no no no no laugh">
+            <div class="button-text" data-text="Oh no no no no laugh"></div>
+        </button>
+        <button onclick="playAudio(40)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Oh no Tiktok Meme">
+            <div class="button-text" data-text="Oh no Tiktok Meme"></div>
+        </button>
+        <button onclick="playAudio(41)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Outro Song">
+            <div class="button-text" data-text="Outro Song"></div>
+        </button>
+        <button onclick="playAudio(42)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Noot Noot Meme">
+            <div class="button-text" data-text="Noot Noot Meme"></div>
+        </button>
+        <button onclick="playAudio(43)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="Right Foot Creep">
+            <div class="button-text" data-text="Right Foot Creep"></div>
+        </button>
+        <button onclick="playAudio(44)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Sponge Stank Noise">
+            <div class="button-text" data-text="Sponge Stank Noise"></div>
+        </button>
+        <button onclick="playAudio(45)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="The Weekend Rizz">
+            <div class="button-text" data-text="The Weekend Rizz"></div>
+        </button>
+        <button onclick="playAudio(46)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="How You Are">
+            <div class="button-text" data-text="They Ask You How You Are"></div>
+        </button>
+        <button onclick="playAudio(47)">
+            <img src="Website Sprites/OrangeSoundButton.png" alt="We Do Not Care">
+            <div class="button-text" data-text="We Do Not Care"></div>
+        </button>
+        <button onclick="playAudio(48)">
+            <img src="Website Sprites/PurpleSoundButton.png" alt="Wide Putin Meme">
+            <div class="button-text" data-text="Wide Putin Meme"></div>
+        </button>
+        <button onclick="playAudio(49)">
+            <img src="Website Sprites/GreenSoundButton.png" alt="Z-z-z-z-z-z">
+            <div class="button-text" data-text="Z-z-z-z-z-z"></div>
+        </button>
+        <button onclick="playAudio(50)">
+            <img src="Website Sprites/BlackSoundButton.png" alt="Stop The Cap">
+            <div class="button-text" data-text="Stop The Cap"></div>
+        </button>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="myAudio1" src="Soundboard Sounds/Features Sounds/discord-notification.mp3"></audio>
+    <audio id="myAudio2" src="Soundboard Sounds/Features Sounds/pedro-song.mp3"></audio>
+    <audio id="myAudio3" src="Soundboard Sounds/Features Sounds/vine-boom.mp3"></audio>
+    <audio id="myAudio4" src="Soundboard Sounds/Features Sounds/wait-wait-wait-what-the-hell-legend-sound.mp3"></audio>
+    <audio id="myAudio5" src="Soundboard Sounds/Features Sounds/aaaaaaaa.mp3"></audio>
+    <audio id="myAudio6" src="Soundboard Sounds/Features Sounds/loading-lost-connection-green-screen-with-sound-effect-2_K8HORkT.mp3"></audio>
+    <audio id="myAudio7" src="Soundboard Sounds/Features Sounds/mlg-airhorn.mp3"></audio>
+    <audio id="myAudio8" src="Soundboard Sounds/Features Sounds/nooo.mp3"></audio>
+    <audio id="myAudio9" src="Soundboard Sounds/Features Sounds/oh-my-god-bro-oh-hell-nah-man.mp3"></audio>
+    <audio id="myAudio10" src="Soundboard Sounds/Features Sounds/rizz-sound-effect.mp3"></audio>
+
+    <audio id="myAudio11" src="Soundboard Sounds/Sounds/bone-crack.mp3"></audio>
+    <audio id="myAudio12" src="Soundboard Sounds/Sounds/999-social-credit-siren.mp3"></audio>
+    <audio id="myAudio13" src="Soundboard Sounds/Sounds/drip-goku-meme-song-original-dragon-ball-super-music-clash-of-gods-in-description.mp3"></audio>
+    <audio id="myAudio14" src="Soundboard Sounds/Sounds/get-out.mp3"></audio>
+    <audio id="myAudio15" src="Soundboard Sounds/Sounds/instagram_thud.mp3"></audio>
+    <audio id="myAudio16" src="Soundboard Sounds/Sounds/pew_pew.mp3"></audio>
+    <audio id="myAudio17" src="Soundboard Sounds/Sounds/punch-gaming-sound-effect.mp3"></audio>
+    <audio id="myAudio18" src="Soundboard Sounds/Sounds/snore-mimimimimimi.mp3"></audio>
+    <audio id="myAudio19" src="Soundboard Sounds/Sounds/taco-bell-bong-sfx.mp3"></audio>
+    <audio id="myAudio20" src="Soundboard Sounds/Sounds/bing-chilling_fcdGgUc.mp3"></audio>
+
+    <audio id="myAudio21" src="Soundboard Sounds/Sounds/bruh.mp3"></audio>
+    <audio id="myAudio22" src="Soundboard Sounds/Sounds/bye-bye-lumi-athena-sfx.mp3"></audio>
+    <audio id="myAudio23" src="Soundboard Sounds/Sounds/correct.mp3"></audio>
+    <audio id="myAudio24" src="Soundboard Sounds/Sounds/crack_the_whip.mp3"></audio>
+    <audio id="myAudio25" src="Soundboard Sounds/Sounds/ding-sound-effect.mp3"></audio>
+    <audio id="myAudio26" src="Soundboard Sounds/Sounds/discord-call-sound.mp3"></audio>
+    <audio id="myAudio27" src="Soundboard Sounds/Sounds/discord-leave-noise.mp3"></audio>
+    <audio id="myAudio28" src="Soundboard Sounds/Sounds/five-nights-at-freddys-full-scream-sound_2.mp3"></audio>
+    <audio id="myAudio29" src="Soundboard Sounds/Sounds/fortnite-default-dance-bass-boosted.mp3"></audio>
+    <audio id="myAudio30" src="Soundboard Sounds/Sounds/heknew.mp3"></audio>
+
+    <audio id="myAudio31" src="Soundboard Sounds/Sounds/huh.mp3"></audio>
+    <audio id="myAudio32" src="Soundboard Sounds/Sounds/im-bout-to-cuhhhh.mp3"></audio>
+    <audio id="myAudio33" src="Soundboard Sounds/Sounds/jeopardy-themelq.mp3"></audio>
+    <audio id="myAudio34" src="Soundboard Sounds/Sounds/ladies-and-gentlemen-we-got-him-song.mp3"></audio>
+    <audio id="myAudio35" src="Soundboard Sounds/Sounds/let-her-go.mp3"></audio>
+    <audio id="myAudio36" src="Soundboard Sounds/Sounds/michael-dont-leave-me-here.mp3"></audio>
+    <audio id="myAudio37" src="Soundboard Sounds/Sounds/mikejebait.mp3"></audio>
+    <audio id="myAudio38" src="Soundboard Sounds/Sounds/mwahahaha.mp3"></audio>
+    <audio id="myAudio39" src="Soundboard Sounds/Sounds/oh-no-no-no-no-laugh.mp3"></audio>
+    <audio id="myAudio40" src="Soundboard Sounds/Sounds/oh-no-no-no-tik-tok-song-sound-effect.mp3"></audio>
+
+    <audio id="myAudio41" src="Soundboard Sounds/Sounds/outro-song.mp3"></audio>
+    <audio id="myAudio42" src="Soundboard Sounds/Sounds/pikmin-gcn.mp3"></audio>
+    <audio id="myAudio43" src="Soundboard Sounds/Sounds/right-foot-creep.mp3"></audio>
+    <audio id="myAudio44" src="Soundboard Sounds/Sounds/sponge-stank-noise.mp3"></audio>
+    <audio id="myAudio45" src="Soundboard Sounds/Sounds/the-weeknd-rizzz.mp3"></audio>
+    <audio id="myAudio46" src="Soundboard Sounds/Sounds/they-ask-you-how-you-are-and-you-just-have-to-say-that-youre-fine-sound-effect_IgYM1CV.mp3"></audio>
+    <audio id="myAudio47" src="Soundboard Sounds/Sounds/we-do-not-care.mp3"></audio>
+    <audio id="myAudio48" src="Soundboard Sounds/Sounds/wide-putin.mp3"></audio>
+    <audio id="myAudio49" src="Soundboard Sounds/Sounds/z-z-z-z-z-z.mp3"></audio>
+    <audio id="myAudio50" src="Soundboard Sounds/Sounds/zias-stop-the-cap_RjHQpxU.mp3"></audio>
+
+    <script>
+        function playAudio(id) {
+            const audio = document.getElementById('myAudio' + id);
+            if (audio) {
+                audio.play();
+            }
+        }
+    </script>
+
+</body>
+</html>

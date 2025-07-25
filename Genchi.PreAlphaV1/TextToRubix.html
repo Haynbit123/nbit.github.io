@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Rubik's Cube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 300px;
+        }
+        button {
+            background-color: #6200ea;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3700b3;
+        }
+        #binaryOutput {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #222;
+            border-radius: 5px;
+            display: inline-block;
+            text-align: left;
+            font-size: 20px;
+            line-height: 1.8;
+            white-space: pre-wrap; /* Ensure the content wraps correctly */
+            word-wrap: break-word; /* Breaks long words when necessary */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            max-width: 50%; /* Limit maximum width */
+            max-height: 90vh; /* Limit maximum height */
+            overflow-y: auto; /* Allow scrolling if the content overflows */
+        }
+        .grids {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);  /* Use fractions for equal sizing */
+            grid-template-rows: repeat(3, 1fr);     /* Use fractions for equal sizing */
+            gap: 4px;
+            background-color: #444;
+            border: 3px solid #222;
+            border-radius: 8px;
+            width: 170px; /* Width adjusted for larger cells */
+            height: 170px; /* Height adjusted for larger cells */
+        }
+        .grid div {
+            width: 100%;  /* Make cells fill the available space */
+            height: 100%; /* Make cells fill the available space */
+            background-color: #444;
+        }
+        .grid div.red { background-color: red; }
+        .grid div.blue { background-color: blue; }
+        .grid div.green { background-color: green; }
+        .grid div.yellow { background-color: yellow; }
+        .grid div.white { background-color: white; }
+        .grid div.orange { background-color: orange; }
+    </style>
+</head>
+<body>
+    <h1>Text to Rubik's Cube Translation Algorithm</h1>
+    <div>
+        <input type="text" id="textInput" placeholder="Type something...">
+        <button onclick="convertToRubiks()">Convert</button>
+    </div>
+    <div id="binaryOutput"></div> <!-- Original binary result moved to the top right -->
+    <div class="grids" id="grids"></div> <!-- Grids positioned at the bottom left -->
+
+    <script>
+        function convertToRubiks() {
+            const input = document.getElementById('textInput').value;
+            const binaryOutput = document.getElementById('binaryOutput');
+            const gridsContainer = document.getElementById('grids');
+
+            binaryOutput.innerHTML = ''; // Clear previous binary result
+            gridsContainer.innerHTML = ''; // Clear previous grids
+
+            if (!input) {
+                alert("No text has been inputed so nothing can be translated.");
+                return;
+            }
+
+            // Create 6 grids for Rubik's Cube representation
+            const maxGrids = 6;
+            const grids = [];
+            for (let i = 0; i < maxGrids; i++) {
+                const grid = document.createElement('div');
+                grid.className = 'grid';
+                gridsContainer.appendChild(grid);
+                grids.push(grid);
+            }
+
+            // Helper function to get color class from binary group
+            const getColorClass = (group) => {
+                switch (group) {
+                    case '000': return 'red';
+                    case '001': return 'blue';
+                    case '010': return 'green';
+                    case '011': return 'yellow';
+                    case '100': return 'white';
+                    case '101': return 'orange';
+                    default: return ''; // No color for invalid binary
+                }
+            };
+
+            // Convert text to binary and process each letter
+            let currentGridIndex = 0;
+            let currentCellIndex = 0; // Tracks cell position within the current grid (0-8)
+            let binaryResult = ''; // Store binary result here for later use
+
+            input.split('').forEach(char => {
+                if (currentGridIndex >= maxGrids) return; // Stop if all grids are filled
+
+                let binary = char.charCodeAt(0).toString(2).padStart(8, '0');
+                binaryResult += `${char}: ${binary}\n`; // Store binary result
+                
+                let groups = binary.match(/.{1,3}/g); // Split into groups of 3 bits
+
+                // Add an extra 0 to the third group if it exists
+                if (groups[2]) {
+                    groups[2] = '0' + groups[2];
+                }
+
+                // Fill grids with colors based on binary groups
+                groups.forEach(group => {
+                    if (currentGridIndex >= maxGrids) return; // Stop if all grids are filled
+
+                    const colorClass = getColorClass(group);
+                    const cell = document.createElement('div');
+                    if (colorClass) {
+                        cell.className = colorClass;
+                    }
+
+                    grids[currentGridIndex].appendChild(cell);
+                    currentCellIndex++;
+
+                    // Move to the next grid if the current one is full
+                    if (currentCellIndex >= 9) {
+                        currentCellIndex = 0;
+                        currentGridIndex++;
+                    }
+                });
+            });
+
+            binaryOutput.innerHTML = binaryResult; // Display binary result
+        }
+    </script>
+</body>
+</html>
