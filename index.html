@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nbit_123.fun</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            position: relative;
+            margin: 0;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+        }
+
+        .topnav a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: background-color 0.3s;
+        }
+
+        .topnav a:hover {
+            background-color: #575757;
+        }
+
+        .header {
+            margin-top: 0;
+            padding-top: 10px;
+        }
+
+        h1, p {
+            font-weight: bold;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 125px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            animation: none;
+        }
+
+        .buttons button img {
+            width: 250px;
+            height: auto;
+        }
+
+        @keyframes grow {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes shrink {
+            from {
+                transform: scale(1.1);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        button:hover img {
+            animation: grow 0.3s forwards;
+            filter: brightness(0.9);
+        }
+
+        button img {
+            animation: shrink 0.3s forwards;
+        }
+
+        button .title {
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+
+        .rating {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .rating button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .rating button:hover {
+            background-color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="/Games/GamesMenu.html">Games</a>
+        <a href="Soundboard.html">Soundboard</a>
+        <a href="VideoPlayer.html">Video Player</a>
+        <a href="Notes.html">Notes</a>
+    </div>
+
+    <div class="header">
+        <h1></h1>
+    </div>
+
+    <div class="buttons">
+        <button class="Games" onclick="window.location.href='Games/GamesMenu.html';">
+            <img src="Website Sprites/GamesButton.png" alt="Games">
+            <div class="title">Games</div>
+        </button>
+
+        <button class="soundboard" onclick="window.location.href='Soundboard.html';">
+            <img src="Website Sprites/SoundboardButton.png" alt="Soundboard">
+            <div class="title">Soundboard</div>
+        </button>
+
+        <button class="video-player" onclick="window.location.href='VideoPlayer.html';">
+            <img src="Website Sprites/VideoPlayerButton.png" alt="Video Player">
+            <div class="title">Video Player</div>
+        </button>
+
+        <button class="note" onclick="window.location.href='Notes.html';">
+            <img src="Website Sprites/note.png" alt="Note">
+            <div class="title">Notes</div>
+        </button>
+    </div>
+
+    <div class="rating">
+        <button onclick="openRatingModal()">Rate Us</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

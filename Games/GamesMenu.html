@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Games</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            margin: 0;
+            padding: 0; /* Removed top padding */
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* Top navigation bar */
+        .topnav {
+            overflow: hidden;
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px; /* Add this to create space below the navbar */
+        }
+
+
+        .topnav a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+            transition: background-color 0.3s;
+        }
+
+        .topnav a:hover {
+            background-color: #575757;
+        }
+
+        /* Game buttons */
+        button {
+            padding: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+
+        button img {
+            width: 150px;
+            height: auto;
+            border-radius: 50px;
+            border: 10px solid rgb(0, 0, 0);
+            display: block;
+            margin: 0 auto;
+        }
+
+        @keyframes grow {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes shrink {
+            from {
+                transform: scale(1.1);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        button:hover img {
+            filter: brightness(0.9);
+            animation: grow 0.3s forwards;
+        }
+
+        button .title {
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav">
+        <a href="../index.html">Home</a>
+        <a href="GamesMenu.html">Games</a> <!-- stays as-is since this file is in the same folder -->
+        <a href="../Soundboard.html">Soundboard</a>
+        <a href="../VideoPlayer.html">Video Player</a>
+        <a href="../Notes.html">Notes</a>
+    </div>
+
+    <h1>Welcome to the Games Menu! Select a game to play.</h1>
+
+    <button onclick="window.location.href='Games/Slope.html';">
+        <img src="GameImages/SlopeLogo.jpeg" alt="Slope">
+        <div class="title">Slope</div>
+    </button>
+
+    <button onclick="window.location.href='Games/Flappybird.html';">
+        <img src="GameImages/FlappybirdLogo.jpeg" alt="Flappy Bird">
+        <div class="title">Flappy Bird</div>
+    </button>
+
+    <button onclick="window.location.href='Games/Gunspin.html';">
+        <img src="GameImages/GunspinLogo.webp" alt="Gunspin">
+        <div class="title">Gunspin</div>
+    </button>
+
+    <button onclick="window.location.href='Games/TimeShooter2.html';">
+        <img src="GameImages/TimeShooter2Logo.webp" alt="Time Shooter 2">
+        <div class="title">Time Shooter 2</div>
+    </button>
+
+    <button onclick="window.location.href='Games/TimeShooter3.html';">
+        <img src="GameImages/TimeShooter3Logo.webp" alt="Time Shooter 3">
+        <div class="title">Time Shooter 3</div>
+    </button>
+
+    <button onclick="window.location.href='Games/Snowballio.html';">
+        <img src="GameImages/SnowballioLogo.webp" alt="Snowball.io">
+        <div class="title">Snowball.io</div>
+    </button>
+
+    <button onclick="window.location.href='Games/Minecraft1.8.html';">
+        <img src="GameImages/MinecraftLogo.webp" alt="Minecraft 1.8">
+        <div class="title">Minecraft 1.8 (kinda buggy)</div>
+    </button>
+
+    <button onclick="window.location.href='Games/Recoil.html';">
+        <img src="GameImages/RecoilLogo.webp" alt="Recoil">
+        <div class="title">Recoil</div>
+    </button>
+
+    <button onclick="window.location.href='Games/RooftopSnipers.html';">
+        <img src="GameImages/RooftopSnipersLogo.webp" alt="Rooftop Snipers">
+        <div class="title">Rooftop Snipers</div>
+    </button>
+
+    <button onclick="window.location.href='Games/DinoRunnerGame.html';">
+        <img src="GameImages/DinoRunnerGameLogo.webp" alt="Dino Runner Game">
+        <div class="title">Dino Runner Game</div>
+    </button>
+
+    <button onclick="window.location.href='Games/PaperIO2.html';">
+        <img src="GameImages/PaperIO2Logo.webp" alt="Paper.io 2">
+        <div class="title">Paper.io 2</div>
+    </button>
+
+</body>
+</html>
